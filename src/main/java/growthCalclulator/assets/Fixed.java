@@ -4,7 +4,7 @@ public class Fixed {
 
 	private long principle;
 	private double interestRate;
-	private int length;
+	private double length;
 	private long endValue;
 	private int compoundFrequency;
 
@@ -44,11 +44,11 @@ public class Fixed {
 		this.interestRate = interestRate;
 	}
 
-	public int getLength() {
+	public double getLength() {
 		return length;
 	}
 
-	public void setLength(int length) {
+	public void setLength(double length) {
 		this.length = length;
 	}
 

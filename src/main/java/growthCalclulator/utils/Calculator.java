@@ -11,8 +11,8 @@ public class Calculator {
 
 	public static Fixed calculateValue(Fixed fixed) {
 		long p = fixed.getPrinciple();
-		double r = fixed.getInterestRate();
-		int l = fixed.getLength();
+		double r = fixed.getInterestRate() / 100;
+		double l = fixed.getLength();
 		int n = fixed.getCompoundFrequency();
 
 		double t = p * Math.pow(1 + (r / n), n * l);
