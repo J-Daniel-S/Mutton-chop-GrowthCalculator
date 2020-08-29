@@ -8,11 +8,11 @@ public class Fixed {
 	private long endValue;
 	private int compoundFrequency;
 
-	public Fixed(long principle, double interestRate, int length, int compoundFrequency) {
+	public Fixed(long principle, double interestRate, int iLength, int compoundFrequency) {
 		super();
 		this.principle = principle;
 		this.interestRate = interestRate;
-		this.length = length;
+		this.length = iLength;
 		this.compoundFrequency = compoundFrequency;
 	}
 
@@ -44,12 +44,12 @@ public class Fixed {
 		this.interestRate = interestRate;
 	}
 
-	public double getLength() {
+	public double getiLength() {
 		return length;
 	}
 
-	public void setLength(double length) {
-		this.length = length;
+	public void setiLength(double iLength) {
+		this.length = iLength;
 	}
 
 	public long getEndValue() {
@@ -62,8 +62,8 @@ public class Fixed {
 
 	@Override
 	public String toString() {
-		return "Fixed [principle=" + principle + ", interestRate=" + interestRate + ", length=" + length + ", endValue="
-				+ endValue + "]";
+		return "Fixed [principle=" + principle + ", interestRate=" + interestRate + ", length=" + length
+				+ ", endValue=" + endValue + "]";
 	}
 
 }

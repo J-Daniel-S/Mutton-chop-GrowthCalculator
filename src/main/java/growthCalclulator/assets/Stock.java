@@ -16,6 +16,7 @@ public class Stock {
 	private long[] cashFlows;
 	@NonNull
 	private long[] capitalExpenditures;
+	private long[] freeCashFlow;
 	private long[] change;
 	private long avgChange;
 
@@ -54,6 +55,14 @@ public class Stock {
 
 	public Stock() {
 
+	}
+
+	public long[] getFreeCashFlow() {
+		return freeCashFlow;
+	}
+
+	public void setFreeCashFlow(long[] freeCashFlow) {
+		this.freeCashFlow = freeCashFlow;
 	}
 
 	public long getAvgChange() {
