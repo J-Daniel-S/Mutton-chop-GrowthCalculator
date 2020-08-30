@@ -47,6 +47,15 @@ public class Stock {
 		this.shares = shares;
 	}
 
+	public Stock(@NonNull long[] freeCashFlow, long currentEquity, long desiredReturn, String mos, long shares) {
+		super();
+		this.freeCashFlow = freeCashFlow;
+		this.currentEquity = currentEquity;
+		this.desiredReturn = desiredReturn;
+		this.marginOfSafety = mos;
+		this.shares = shares;
+	}
+
 	public Stock(@NonNull long[] cashFlows, @NonNull long[] capitalExpenditures) {
 		super();
 		this.cashFlows = cashFlows;
