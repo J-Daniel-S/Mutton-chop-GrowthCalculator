@@ -26,8 +26,22 @@ public class AssetController {
 		return ResponseEntity.ok(stock);
 	}
 
+	@PostMapping("/stock-fcf")
+	public ResponseEntity<Stock> getPriceFcf(@RequestBody Stock stock) {
+		long total = Calculator.calculateTotalFcf(stock);
+		Calculator.setPrices(stock, total);
+		return ResponseEntity.ok(stock);
+	}
+
 	@PostMapping("/stock/{growthRate}")
 	public ResponseEntity<Stock> getPrice(@RequestBody Stock stock, @PathVariable long growthRate) {
+		long total = Calculator.calculateTotal(stock, growthRate);
+		Calculator.setPrices(stock, total);
+		return ResponseEntity.ok(stock);
+	}
+
+	@PostMapping("/stock-fcf/{growthRate}")
+	public ResponseEntity<Stock> getPriceFcf(@RequestBody Stock stock, @PathVariable long growthRate) {
 		long total = Calculator.calculateTotal(stock, growthRate);
 		Calculator.setPrices(stock, total);
 		return ResponseEntity.ok(stock);

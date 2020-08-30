@@ -112,6 +112,7 @@ public class Calculator {
 	}
 
 	public static long calculateTotal(Stock stock) {
+		stock.setMarginOfSafety(String.valueOf(Double.valueOf(stock.getMarginOfSafety()) / 100));
 		long[] fcf = calculateFreeCashFlow(stock);
 		long[] percentChange = calculatePercentChange(fcf);
 		stock.setChange(percentChange);
@@ -122,6 +123,20 @@ public class Calculator {
 		stock.setAvgChange(fcfChange);
 		long totalDcf = totalDcf(calcFcf, fcfChange, dcfMultipliers);
 		return totalDcf + equity;
+	}
+
+	public static long calculateTotalFcf(Stock stock) {
+		stock.setMarginOfSafety(String.valueOf(Double.valueOf(stock.getMarginOfSafety()) / 100));
+		long[] percentChange = calculatePercentChange(stock.getFreeCashFlow());
+		stock.setChange(percentChange);
+		double[] dcfMultipliers = calculateDcfMultipliers(stock.getDesiredReturn());
+		long calcFcf = getFcfForCalculation(stock.getFreeCashFlow());
+		long fcfChange = getChangeForCalc(percentChange);
+		long equity = stock.getCurrentEquity();
+		stock.setAvgChange(fcfChange);
+		long totalDcf = totalDcf(calcFcf, fcfChange, dcfMultipliers);
+		return totalDcf + equity;
+
 	}
 
 	public static long calculateTotal(Stock stock, long change) {

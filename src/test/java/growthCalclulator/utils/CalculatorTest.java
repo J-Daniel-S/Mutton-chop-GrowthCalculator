@@ -19,28 +19,28 @@ public class CalculatorTest {
 
 	@Test
 	public void testCalculateValueCompoundMonthly() {
-		fixed = new Fixed(1000, 0.05, 10, 12);
+		fixed = new Fixed(1000, 5, 10, 12);
 		Calculator.calculateValue(fixed);
 		assertEquals(1647, fixed.getEndValue());
 	}
 
 	@Test
 	public void testCalculateValueCompoundAnnually() {
-		fixed = new Fixed(1000, 0.05, 10, 1);
+		fixed = new Fixed(1000, 5, 10, 1);
 		Calculator.calculateValue(fixed);
 		assertEquals(1628, fixed.getEndValue());
 	}
 
 	@Test
 	public void testCalculateValueCompoundSemiAnnually() {
-		fixed = new Fixed(1000, 0.05, 10, 2);
+		fixed = new Fixed(1000, 5, 10, 2);
 		Calculator.calculateValue(fixed);
 		assertEquals(1638, fixed.getEndValue());
 	}
 
 	@Test
 	public void testCalculateValueCompoundDaily() {
-		fixed = new Fixed(1000, 0.05, 10, 365);
+		fixed = new Fixed(1000, 5, 10, 365);
 		Calculator.calculateValue(fixed);
 		assertEquals(1648, fixed.getEndValue());
 	}
@@ -124,7 +124,7 @@ public class CalculatorTest {
 
 	@Test
 	public void testSetPrices() {
-		stock = new Stock(cf, capex, 10000, 10, "0.25", 500);
+		stock = new Stock(cf, capex, 10000, 10, "25", 500);
 		long total = Calculator.calculateTotal(stock);
 		Calculator.setPrices(stock, total);
 		DecimalFormat df = new DecimalFormat("0.00");
@@ -134,13 +134,26 @@ public class CalculatorTest {
 
 	@Test
 	public void testSetPricesArbitraryGrowth() {
-		stock = new Stock(cf, capex, 10000, 10, "0.3", 500);
+		stock = new Stock(cf, capex, 10000, 10, "30", 500);
 		long total = Calculator.calculateTotal(stock, 12);
 		Calculator.setPrices(stock, total);
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		assertEquals("56.58", df.format(stock.getBuyAndHoldValue()));
 		assertEquals("39.61", df.format(stock.getDiscountedValue()));
+	}
+
+	@Test
+	public void testSetPricesFcf() {
+		long[] fcf = { 950, 1045, 1149, 1265, 1392 };
+		stock = new Stock(fcf, 10000, 10, "25", 500);
+		long total = Calculator.calculateTotalFcf(stock);
+		Calculator.setPrices(stock, total);
+		DecimalFormat df = new DecimalFormat("0.00");
+
+		assertEquals("50.95", df.format(stock.getBuyAndHoldValue()));
+		assertEquals("38.22", df.format(stock.getDiscountedValue()));
+
 	}
 
 }
