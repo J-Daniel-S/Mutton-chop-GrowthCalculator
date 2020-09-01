@@ -6,6 +6,7 @@ import org.springframework.lang.NonNull;
 
 public class Stock {
 
+	private String ticker;
 	private double buyAndHoldValue;
 	private double discountedValue;
 	private long desiredReturn;
@@ -16,8 +17,9 @@ public class Stock {
 	private long[] cashFlows;
 	@NonNull
 	private long[] capitalExpenditures;
-	private long[] change;
-	private long avgChange;
+	private long[] freeCashFlow;
+	private double[] change;
+	private double avgChange;
 
 	public Stock(@NonNull long[] cashFlows, @NonNull long[] capitalExpenditures, long currentEquity,
 			long desiredReturn) {
@@ -46,6 +48,15 @@ public class Stock {
 		this.shares = shares;
 	}
 
+	public Stock(@NonNull long[] freeCashFlow, long currentEquity, long desiredReturn, String mos, long shares) {
+		super();
+		this.freeCashFlow = freeCashFlow;
+		this.currentEquity = currentEquity;
+		this.desiredReturn = desiredReturn;
+		this.marginOfSafety = mos;
+		this.shares = shares;
+	}
+
 	public Stock(@NonNull long[] cashFlows, @NonNull long[] capitalExpenditures) {
 		super();
 		this.cashFlows = cashFlows;
@@ -56,12 +67,28 @@ public class Stock {
 
 	}
 
-	public long getAvgChange() {
+	public String getTicker() {
+		return ticker;
+	}
+
+	public void setTicker(String ticker) {
+		this.ticker = ticker;
+	}
+
+	public long[] getFreeCashFlow() {
+		return freeCashFlow;
+	}
+
+	public void setFreeCashFlow(long[] freeCashFlow) {
+		this.freeCashFlow = freeCashFlow;
+	}
+
+	public double getAvgChange() {
 		return avgChange;
 	}
 
-	public void setAvgChange(long avgChange) {
-		this.avgChange = avgChange;
+	public void setAvgChange(double fcfChange) {
+		this.avgChange = fcfChange;
 	}
 
 	public String getMarginOfSafety() {
@@ -96,11 +123,11 @@ public class Stock {
 		this.currentEquity = currentEquity;
 	}
 
-	public long[] getChange() {
+	public double[] getChange() {
 		return change;
 	}
 
-	public void setChange(long[] percentChange) {
+	public void setChange(double[] percentChange) {
 		this.change = percentChange;
 	}
 

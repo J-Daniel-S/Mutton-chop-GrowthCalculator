@@ -61,14 +61,14 @@ public class FixedTest {
 	@Test
 	public void testGetLength() {
 		Fixed fixed = new Fixed(5000, 0.07, 10, 10);
-		assertEquals(10, fixed.getLength());
+		assertEquals("10", String.valueOf(fixed.getiLength()));
 	}
 
 	@Test
 	public void testSetLength() {
 		Fixed fixed = new Fixed();
-		fixed.setLength(10);
-		assertEquals(10, fixed.getLength());
+		fixed.setiLength(10);
+		assertEquals("10", String.valueOf(fixed.getiLength()));
 	}
 
 	@Test
