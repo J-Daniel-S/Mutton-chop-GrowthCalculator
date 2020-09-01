@@ -3,6 +3,7 @@ package growthCalclulator.utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 import org.junit.Test;
@@ -56,8 +57,8 @@ public class CalculatorTest {
 	public void testCalculateFcfChange() {
 		stock = new Stock(cf, capex);
 		long[] fcf = Calculator.calculateFreeCashFlow(stock);
-		long[] change = Calculator.calculatePercentChange(fcf);
-		assertEquals(110, change[2]);
+		double[] change = Calculator.calculatePercentChange(fcf);
+		assertEquals(BigDecimal.valueOf(110), BigDecimal.valueOf(change[2]));
 	}
 
 	@Test
@@ -72,9 +73,9 @@ public class CalculatorTest {
 	public void testGetChangeForCalc() {
 		stock = new Stock(cf, capex);
 		long[] fcf = Calculator.calculateFreeCashFlow(stock);
-		long[] percentChange = Calculator.calculatePercentChange(fcf);
-		long changeForCalc = Calculator.getChangeForCalc(percentChange);
-		assertEquals(109, changeForCalc);
+		double[] percentChange = Calculator.calculatePercentChange(fcf);
+		double changeForCalc = Calculator.getChangeForCalc(percentChange);
+		assertEquals(BigDecimal.valueOf(109), BigDecimal.valueOf(changeForCalc));
 	}
 
 	@Test
@@ -100,9 +101,9 @@ public class CalculatorTest {
 	public void testTotalDiscountedCashFlow() {
 		stock = new Stock(cf, capex);
 		long[] fcf = Calculator.calculateFreeCashFlow(stock);
-		long[] change = Calculator.calculatePercentChange(fcf);
+		double[] change = Calculator.calculatePercentChange(fcf);
 		long calcFcf = Calculator.getFcfForCalculation(fcf);
-		long fcfChange = Calculator.getChangeForCalc(change);
+		double fcfChange = Calculator.getChangeForCalc(change);
 		double[] dcfMultipliers = Calculator.calculateDcfMultipliers(10);
 		long totalDcf = Calculator.totalDcf(calcFcf, fcfChange, dcfMultipliers);
 		assertEquals(15477, totalDcf);

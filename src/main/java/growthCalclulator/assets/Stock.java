@@ -6,6 +6,7 @@ import org.springframework.lang.NonNull;
 
 public class Stock {
 
+	private String ticker;
 	private double buyAndHoldValue;
 	private double discountedValue;
 	private long desiredReturn;
@@ -17,8 +18,8 @@ public class Stock {
 	@NonNull
 	private long[] capitalExpenditures;
 	private long[] freeCashFlow;
-	private long[] change;
-	private long avgChange;
+	private double[] change;
+	private double avgChange;
 
 	public Stock(@NonNull long[] cashFlows, @NonNull long[] capitalExpenditures, long currentEquity,
 			long desiredReturn) {
@@ -66,6 +67,14 @@ public class Stock {
 
 	}
 
+	public String getTicker() {
+		return ticker;
+	}
+
+	public void setTicker(String ticker) {
+		this.ticker = ticker;
+	}
+
 	public long[] getFreeCashFlow() {
 		return freeCashFlow;
 	}
@@ -74,12 +83,12 @@ public class Stock {
 		this.freeCashFlow = freeCashFlow;
 	}
 
-	public long getAvgChange() {
+	public double getAvgChange() {
 		return avgChange;
 	}
 
-	public void setAvgChange(long avgChange) {
-		this.avgChange = avgChange;
+	public void setAvgChange(double fcfChange) {
+		this.avgChange = fcfChange;
 	}
 
 	public String getMarginOfSafety() {
@@ -114,11 +123,11 @@ public class Stock {
 		this.currentEquity = currentEquity;
 	}
 
-	public long[] getChange() {
+	public double[] getChange() {
 		return change;
 	}
 
-	public void setChange(long[] percentChange) {
+	public void setChange(double[] percentChange) {
 		this.change = percentChange;
 	}
 
