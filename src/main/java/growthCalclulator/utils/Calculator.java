@@ -60,7 +60,6 @@ public class Calculator {
 		for (int i = 3; i >= 0; i--) {
 			changeArr[i] = ((fcf[i + 1] * 100) / fcf[i]);
 		}
-//		Arrays.stream(changeArr).forEach(System.out::println);
 
 		return changeArr;
 	}
@@ -96,7 +95,6 @@ public class Calculator {
 			}
 
 			dcf = lastFcf * dcfMultipliers[i];
-//			System.out.println(dcf);
 			lastFcf = (lastFcf * multiplier.doubleValue());
 			totalDcf += (long) dcf;
 		}
@@ -123,6 +121,7 @@ public class Calculator {
 		long equity = stock.getCurrentEquity();
 		stock.setAvgChange(fcfChange);
 		long totalDcf = totalDcf(calcFcf, fcfChange, dcfMultipliers);
+		System.out.println(totalDcf + equity);
 		return totalDcf + equity;
 	}
 
