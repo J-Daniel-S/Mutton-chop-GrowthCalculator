@@ -58,7 +58,7 @@ public class CalculatorTest {
 		stock = new Stock(cf, capex);
 		long[] fcf = Calculator.calculateFreeCashFlow(stock);
 		double[] change = Calculator.calculatePercentChange(fcf);
-		assertEquals(BigDecimal.valueOf(110), BigDecimal.valueOf(change[2]));
+		assertEquals(BigDecimal.valueOf(110.0), BigDecimal.valueOf(change[2]));
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class CalculatorTest {
 		long[] fcf = Calculator.calculateFreeCashFlow(stock);
 		double[] percentChange = Calculator.calculatePercentChange(fcf);
 		double changeForCalc = Calculator.getChangeForCalc(percentChange);
-		assertEquals(BigDecimal.valueOf(109), BigDecimal.valueOf(changeForCalc));
+		assertEquals(BigDecimal.valueOf(109.83333333333333), BigDecimal.valueOf(changeForCalc));
 	}
 
 	@Test
@@ -106,20 +106,22 @@ public class CalculatorTest {
 		double fcfChange = Calculator.getChangeForCalc(change);
 		double[] dcfMultipliers = Calculator.calculateDcfMultipliers(10);
 		long totalDcf = Calculator.totalDcf(calcFcf, fcfChange, dcfMultipliers);
-		assertEquals(15477, totalDcf);
+		assertEquals(16161, totalDcf);
 	}
 
 	@Test
 	public void testCalculateTotal() {
 		stock = new Stock(cf, capex, 10000, 10);
+		stock.setMarginOfSafety("25");
 		long total = Calculator.calculateTotal(stock);
-		assertEquals(25477, total);
+		assertEquals(26161, total);
 	}
 
 	@Test
 	public void testCalculateTotalArbitraryGrowth() {
 		stock = new Stock(cf, capex, 10000, 10);
-		long total = Calculator.calculateTotal(stock, 12);
+		stock.setMarginOfSafety("25");
+		long total = Calculator.calculateTotal(stock, 112);
 		assertEquals(28290, total);
 	}
 
@@ -129,14 +131,14 @@ public class CalculatorTest {
 		long total = Calculator.calculateTotal(stock);
 		Calculator.setPrices(stock, total);
 		DecimalFormat df = new DecimalFormat("0.00");
-		assertEquals("50.95", df.format(stock.getBuyAndHoldValue()));
-		assertEquals("38.22", df.format(stock.getDiscountedValue()));
+		assertEquals("52.32", df.format(stock.getBuyAndHoldValue()));
+		assertEquals("39.24", df.format(stock.getDiscountedValue()));
 	}
 
 	@Test
 	public void testSetPricesArbitraryGrowth() {
 		stock = new Stock(cf, capex, 10000, 10, "30", 500);
-		long total = Calculator.calculateTotal(stock, 12);
+		long total = Calculator.calculateTotal(stock, 112);
 		Calculator.setPrices(stock, total);
 		DecimalFormat df = new DecimalFormat("0.00");
 
@@ -152,8 +154,8 @@ public class CalculatorTest {
 		Calculator.setPrices(stock, total);
 		DecimalFormat df = new DecimalFormat("0.00");
 
-		assertEquals("50.95", df.format(stock.getBuyAndHoldValue()));
-		assertEquals("38.22", df.format(stock.getDiscountedValue()));
+		assertEquals("52.32", df.format(stock.getBuyAndHoldValue()));
+		assertEquals("39.24", df.format(stock.getDiscountedValue()));
 
 	}
 
